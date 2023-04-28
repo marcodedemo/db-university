@@ -1,0 +1,80 @@
+
+
+1)
+SELECT `students`.`name`, `students`.`surname`, `degrees`.`name`
+FROM `students`
+INNER JOIN `degrees`
+ON `students`.`degree_id` = `degrees`.`id`
+WHERE `degrees`.`name` = "Corso di Laurea in Economia";
+
+
+2)
+SELECT `degrees`.`name`, `degrees`.`level`, `departments`.`name` 
+FROM `degrees`
+INNER JOIN `departments`
+ON `degrees`.`department_id` = `departments`.`id`
+WHERE `departments`.`name` = "Dipartimento di Neuroscienze"
+AND `degrees`.`level` = "magistrale";
+
+
+3)
+SELECT `courses`.`name`,`course_teacher`.`course_id`, `course_teacher`.`teacher_id`, `teachers`.`name`, `teachers`.`surname`
+FROM `courses`
+
+INNER JOIN `course_teacher`
+ON `courses`.`id` = `course_teacher`.`course_id`
+
+INNER JOIN `teachers`
+ON `course_teacher`.`teacher_id` = `teachers`.`id`
+
+WHERE `teachers`.`id` = 44;
+
+
+4)
+SELECT `students`.`name` AS `student_name`,`students`.`surname`, `degrees`.`name` AS `degree_name`, `departments`.`name` AS `department_name`
+FROM `students`
+
+INNER JOIN `degrees`
+ON `students`.`degree_id` = `degrees`.`id`
+
+INNER JOIN `departments`
+ON `degrees`.`department_id` = `departments`.`id`  
+
+ORDER BY `student_name` ASC , `students`.`surname` ASC;
+
+
+5)
+SELECT `degrees`.`name` AS `corso_di_laurea`,`courses`.`name` AS `nome_corso`,`teachers`.`name` AS `nome_insegnante`, `teachers`.`surname`
+FROM `course_teacher`
+
+INNER JOIN `courses`
+ON `course_teacher`.`course_id` = `courses`.`id`
+
+INNER JOIN `degrees`
+ON `courses`.`degree_id` = `degrees`.`id`
+
+INNER JOIN `teachers`
+ON `course_teacher`.`teacher_id` = `teachers`.`id`;
+
+
+6)
+SELECT DISTINCT `teachers`.`name` AS `teacher_name`, `teachers`.`surname`, `departments`.`name`
+FROM `course_teacher`
+
+INNER JOIN `teachers`
+ON `course_teacher`.`teacher_id` = `teachers`.`id`
+
+INNER JOIN `courses`
+ON `course_teacher`.`course_id` = `courses`.`id`
+
+INNER JOIN `degrees`
+ON `courses`.`degree_id` = `degrees`.`id`
+
+INNER JOIN `departments`
+ON `degrees`.`department_id` = `departments`.`id`
+
+WHERE `departments`.`name` = "Dipartimento di Matematica"  
+ORDER BY `teacher_name` ASC;
+
+
+7)
